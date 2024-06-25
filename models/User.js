@@ -17,10 +17,6 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         unique: true,
       },
-      UserPassword: {
-        type: DataTypes.STRING(255),
-        allowNull: false,
-      },
     },
     {
       tableName: 'Users',
