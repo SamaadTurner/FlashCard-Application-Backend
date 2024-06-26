@@ -2,8 +2,8 @@
   "development": {
     "host": "localhost",
     "port": 5432,
-    "username": "postgres",
-    "password": "mysecretpassword",
+    "username": "samaad",
+    "password": "",
     "database": "postgres",
     "dialect": "postgres"
   }
