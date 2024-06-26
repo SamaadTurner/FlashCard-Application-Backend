@@ -1,6 +1,6 @@
 const express = require('express');
 const dotenv = require('dotenv');
-const sequelize = require('./models/index');
+const sequelize = require('./models/index').sequelize;
 
 dotenv.config();
 
@@ -9,13 +9,13 @@ app.use(express.json());
 
 // Import routes
 const userRoutes = require('./routes/userRoutes');
-const questionRoutes = require('./routes/questionRoutes');
-const categoryRoutes = require('./routes/categoryRoutes');
+// const questionRoutes = require('./routes/questionRoutes');
+// const categoryRoutes = require('./routes/categoryRoutes');
 
 // Use routes
 app.use('/api/users', userRoutes);
-app.use('/api/questions', questionRoutes);
-app.use('/api/categories', categoryRoutes);
+// app.use('/api/questions', questionRoutes);
+// app.use('/api/categories', categoryRoutes);
 
 // Sync models and start server
 sequelize.sync().then(() => {
