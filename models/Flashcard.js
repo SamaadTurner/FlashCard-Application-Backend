@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       Chapter: {
         type: DataTypes.STRING(50),
-        allowNull: true, // Optional, adjust as needed
+        allowNull: true,
       },
       GotWrong: {
         type: DataTypes.BOOLEAN,
