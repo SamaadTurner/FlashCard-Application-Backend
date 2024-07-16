@@ -25,24 +25,11 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         defaultValue: false,
       },
-      CategoryID: {
-        type: DataTypes.INTEGER,
-        references: {
-          model: 'Category',
-          key: 'CategoryID',
-        },
-        allowNull: false,
-      },
     },
     {
       tableName: 'Flashcard',
       timestamps: false,
     }
   );
-
-  Flashcard.associate = function (models) {
-    Flashcard.belongsTo(models.Category, { foreignKey: 'CategoryID' });
-  };
-
   return Flashcard;
 };

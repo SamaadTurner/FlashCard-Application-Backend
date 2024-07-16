@@ -18,14 +18,15 @@ router.get('/', async (req, res) => {
 
 // Add a new flashcard
 router.post('/', async (req, res) => {
-  const { QuestionText, AnswerText, Chapter, CategoryID } = req.body;
+  console.log('@request', req.body);
+  const { QuestionText, AnswerText, Chapter } = req.body;
+
   try {
     const newFlashcard = await Flashcard.create({
       QuestionText,
       AnswerText,
       Chapter,
       GotWrong: false,
-      CategoryID,
     });
     res.status(201).json(newFlashcard);
   } catch (error) {
