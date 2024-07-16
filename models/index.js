@@ -8,16 +8,6 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
 db.User = require('./User')(sequelize, Sequelize.DataTypes);
-db.Category = require('./Category')(sequelize, Sequelize.DataTypes);
-db.Question = require('./Question')(sequelize, Sequelize.DataTypes);
 db.Flashcard = require('./Flashcard')(sequelize, Sequelize.DataTypes);
-
-// Define associations
-db.User.hasMany(db.Category, { foreignKey: 'UserID' });
-db.Category.belongsTo(db.User, { foreignKey: 'UserID' });
-db.Category.hasMany(db.Question, { foreignKey: 'CategoryID' });
-db.Question.belongsTo(db.Category, { foreignKey: 'CategoryID' });
-db.Category.hasMany(db.Flashcard, { foreignKey: 'CategoryID' });
-db.Flashcard.belongsTo(db.Category, { foreignKey: 'CategoryID' });
 
 module.exports = db;

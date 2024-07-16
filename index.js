@@ -13,8 +13,6 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.use('/api/flashcards', flashcardRoutes);
-app.use('/api/categories', categoryRoutes);
-app.use('/api/users', userRoutes);
 
 const port = process.env.PORT || 5173;
 
