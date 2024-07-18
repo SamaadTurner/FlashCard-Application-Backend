@@ -16,6 +16,32 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const flashcard = await Flashcard.findByPk(id);
+    if (!flashcard) {
+      return res.status(404).json({ error: 'Flashcard not found.' });
+    }
+    // Assuming flashcard is a Sequelize model instance, use toJSON() to get a plain object
+    const flashcardData = flashcard.toJSON();
+    // Adjust the response to match the expected structure
+    const adjustedFlashcard = {
+      FlashcardID: flashcardData.id,
+      QuestionText: flashcardData.QuestionText,
+      AnswerText: flashcardData.AnswerText,
+      Chapter: String(flashcardData.Chapter),
+    };
+    res.status(200).json(adjustedFlashcard);
+  } catch (error) {
+    console.error('Error fetching flashcard:', error);
+    res.status(500).json({
+      error: 'An error occurred while fetching the flashcard.',
+      details: error.message,
+    });
+  }
+});
+
 // Add a new flashcard
 router.post('/', async (req, res) => {
   console.log('@request', req.body);
@@ -38,6 +64,7 @@ router.post('/', async (req, res) => {
 });
 
 // Update a flashcard
+// Update a flashcard
 router.put('/:id', async (req, res) => {
   const { id } = req.params;
   const updates = req.body;
@@ -47,7 +74,15 @@ router.put('/:id', async (req, res) => {
       returning: true,
       plain: true,
     });
-    res.status(200).json(updatedFlashcard[1]);
+
+    const updatedFlashcardData = updatedFlashcard[1].toJSON();
+    const { FlashcardID, ...adjustedUpdatedFlashcard } = {
+      FlashcardID: updatedFlashcardData.FlashcardID,
+      QuestionText: updatedFlashcardData.QuestionText,
+      AnswerText: updatedFlashcardData.AnswerText,
+      Chapter: String(updatedFlashcardData.Chapter),
+    };
+    res.status(200).json(adjustedUpdatedFlashcard);
   } catch (error) {
     console.error('Error updating flashcard:', error);
     res
