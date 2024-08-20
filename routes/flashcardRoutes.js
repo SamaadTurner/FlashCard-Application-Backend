@@ -39,4 +39,21 @@ router.post('/', async (req, res) => {
   }
 });
 
+// Update a flashcard
+router.put('/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const flashcard = await Flashcard.findByPk(id);
+    if (flashcard) {
+      await flashcard.update(req.body);
+      res.json(flashcard);
+    } else {
+      res.status(404).json({ error: 'Flashcard not found' });
+    }
+  } catch (error) {
+    console.error('Error updating flashcard:', error);
+    res.status(500).json({ error: 'Error updating flashcard' });
+  }
+});
+
 module.exports = router;
